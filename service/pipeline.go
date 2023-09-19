@@ -11,11 +11,11 @@ import (
 var cb *circuit.Breaker
 var httpClient *circuit.HTTPClient
 
-func SetupNotebookCircuitBreaker() {
+func SetupPipelineCircuitBreaker() {
 	httpClient, cb = network.GetHttpClient()
 }
 
-func CreateNotebook() {
+func CreatePipeline() {
 	if cb.Ready() {
 		resp, err := httpClient.Post("http://cloud-ml-pipeline-manager.cloud-ml-pipeline:8082/pipeline", "", nil)
 		if err != nil {

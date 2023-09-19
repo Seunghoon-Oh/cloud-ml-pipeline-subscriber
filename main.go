@@ -8,9 +8,9 @@ import (
 	"github.com/nats-io/nats.go"
 )
 
-func main() { 
+func main() {
 	log.SetFlags(0)
-	service.SetupNotebookCircuitBreaker()
+	service.SetupPipelineCircuitBreaker()
 	for {
 		nc, err := nats.Connect("nats://nats.cloud-ml-mgmt:4222")
 		if err != nil {
@@ -25,7 +25,7 @@ func main() {
 			log.Printf("Reply: %s", m.Data)
 			msg := string(m.Data[:])
 			if msg == "create" {
-				service.CreateNotebook()
+				service.CreatePipeline()
 			} else if msg == "delete " {
 				log.Println("Deleted")
 			}
